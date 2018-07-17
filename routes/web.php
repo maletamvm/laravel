@@ -17,25 +17,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('home', 'HomeController@index')->name('home');
-Route::get('logout','Auth\LoginController@logout');
-Route::get('posts/create','PostController@createForm');
-Route::get('main','PostController@show');
-Route::get('/','PostController@show');
-Route::get('posts/edit/{post}','PostController@editForm');
-Route::delete('posts/{post}','PostController@delete');
-Route::post('posts/edit/{id}','PostController@update');
-//
-//Route::get('/',function (){
-//    $posts= \App\Posts::orderBy('created_at' ,'asc')->get();
-//    return view('main' ,[
-//        'posts' =>$posts
-//    ]);
-//});
-Route::post('/posts/create','PostController@addPost');
+Route::get('log','Auth\LoginController@logout')->name('logout');
 
 
-//Route::delete('/{ posts}',function (\App\Task $posts){
-//   $posts->delete();
-//    return redirect('/');
-//});
+Route::get('post/create','Dashboard\PostController@create')->name('post.create');
+
+Route::get('/','Blog\PostController@index')->name('home');
+
+Route::get('post/edit/{id}','Dashboard\PostController@edit')->name('post.edit');
+Route::post('post/edit/{id}','Dashboard\PostController@update')->name('post.update');
+
+Route::delete('post/delete/{post}','Dashboard\PostController@delete')->name('post.delete');
+
+Route::post('/post/store','Dashboard\PostController@store')->name('post.store');
+
+
